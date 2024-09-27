@@ -10,7 +10,7 @@ declare global {
 // Singleton pattern for the first Prisma client (Database 1)
 const prismaClientSingleton1 = (): PrismaClient1 => {
   return new PrismaClient1({
-    datasources: { db: { url: process.env.DATABASE_URL_1 } },
+    datasources: { db: { url: process.env.DATABASE_URL } },
   });
 };
 
