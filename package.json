@@ -6,7 +6,7 @@
   "description": "Template repository for building a Next.js application with MongoDB, Prisma, and Next Auth authentication",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate --schema=./prisma/schema.prisma && next build",
     "start": "next start",
     "lint": "next lint"
   },
