@@ -19,6 +19,7 @@ export const authConfig = {
         const user = await prismaAuth.user.findUnique({
           where: { email },
         });
+        console.log(user);
         if (!user) {
           return null;
         }
