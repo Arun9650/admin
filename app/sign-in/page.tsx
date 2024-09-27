@@ -10,6 +10,7 @@ export default function SignInPage() {
     const password = formData.get("password") as string;
     const res = await signInAction({ email, password });
     if (res.error) {
+      console.log(res.error);
       alert(res.error);
       return;
     }
