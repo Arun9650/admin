@@ -9,7 +9,8 @@ import { redirect } from "next/navigation";
 
 export const signInAction = async (signInValues: SignInValues) => {
   try {
-    await signIn("credentials", signInValues);
+  const user  =   await signIn("credentials", signInValues);
+  console.log("🚀 ~ signInAction ~ user:", user)
   } catch (error) {
     console.log("🚀 ~ signInAction ~ error:", error)
     if (error instanceof AuthError) {
