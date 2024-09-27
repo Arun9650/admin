@@ -1,5 +1,5 @@
-import CopyPlugin from 'copy-webpack-plugin';
-import path from 'path';
+const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -22,4 +22,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
