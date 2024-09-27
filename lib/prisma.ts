@@ -1,16 +1,15 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient as PrismaAuthClient } from '../prisma/generated/auth-client'
 
-const prismaClientSingleton = () => {
-  return new PrismaClient();
-};
 
-type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
+declare global {
+  var prismaAuth: PrismaAuthClient | undefined
+}
 
-// eslint-disable-next-line
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClientSingleton | undefined;
-};
+export const prismaAuth = global.prismaAuth || new PrismaAuthClient({
+  datasources: { db: { url: process.env.AUTH_DATABASE_URL } },
+})
 
-const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
 
-export default prisma;
+if (process.env.NODE_ENV !== 'production') {
+  global.prismaAuth = prismaAuth
+}

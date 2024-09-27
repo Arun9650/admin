@@ -4,7 +4,7 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { AuthError } from "next-auth";
 import { hashSync } from "bcryptjs";
 import { signIn } from "@/auth";
-import prisma from "./prisma";
+import {prismaAuth} from "./prisma";
 import { redirect } from "next/navigation";
 
 export const signInAction = async (signInValues: SignInValues) => {
@@ -28,7 +28,7 @@ export const signUpAction = async (signUpValues: SignUpValues) => {
   const { data } = await signUpSchema.safeParseAsync(signUpValues);
   if (!data) return { error: "Invalid data" };
   try {
-    await prisma.user.create({
+    await prismaAuth.user.create({
       data: {
         ...data,
         password: hashSync(data.password, 10),
