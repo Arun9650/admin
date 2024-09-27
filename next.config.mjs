@@ -1,4 +1,26 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+// Import necessary modules
+const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
-export default nextConfig;
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      // Add the CopyPlugin to copy Prisma client and query engine from the custom directory
+      config.plugins.push(
+        new CopyPlugin({
+          patterns: [
+            {
+              from: path.resolve(__dirname, 'prisma/generated/auth-client'),
+              to: path.resolve(__dirname, '.next/server/prisma-client'), // Ensure this path matches your build requirements
+            },
+          ],
+        })
+      );
+    }
+
+    return config;
+  },
+};
+
+module.exports = nextConfig;
