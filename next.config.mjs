@@ -1,6 +1,5 @@
-// Import necessary modules
-const CopyPlugin = require('copy-webpack-plugin');
-const path = require('path');
+import CopyPlugin from 'copy-webpack-plugin';
+import path from 'path';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,8 +10,8 @@ const nextConfig = {
         new CopyPlugin({
           patterns: [
             {
-              from: path.resolve(__dirname, 'prisma/generated/auth-client'),
-              to: path.resolve(__dirname, '.next/server/prisma-client'), // Ensure this path matches your build requirements
+              from: path.resolve('./prisma/generated/auth-client'),
+              to: path.resolve('./.next/server/prisma-client'), // Ensure this path matches your build requirements
             },
           ],
         })
@@ -23,4 +22,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
