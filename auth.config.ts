@@ -2,7 +2,7 @@ import type { NextAuthConfig } from "next-auth";
 import { signInSchema } from "./lib/form-schemas";
 import { compare } from "bcryptjs";
 import Credentials from "next-auth/providers/credentials";
-import prisma from "./lib/prisma";
+import {prismaAuth} from "./lib/prisma";
 
 export const authConfig = {
   providers: [
@@ -16,7 +16,7 @@ export const authConfig = {
 
         // Validate that the user exists
         const { email, password } = validatedFields.data;
-        const user = await prisma.user.findUnique({
+        const user = await prismaAuth.user.findUnique({
           where: { email },
         });
         if (!user) {
